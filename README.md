@@ -1,2 +1,2 @@
 # The Missing Semester of Your CS Education
-[a link](https://missing.csail.mit.edu/)
+[a https://missing.csail.mit.edu/](https://missing.csail.mit.edu/)

@@ -24,4 +24,6 @@ ls -l -a -h --sort=time --color
 # command that recursively finds all HTML files in the folder and makes a zip with them
 find *.html|xargs zip "htmlfiles.zip"
 
+# A command which recursively find the most recently modified file in a directory.
+ls --sort=time -l | sed -n 2p
 

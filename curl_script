@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# find the min and max of one column, and the difference of the sum of each column.
+
+html_page=$(curl https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/topic-pages/tables/table-1)
+column2=()
+column3=()
+for i in $(seq 43 10 239);do
+	entry1=$(echo $html_page | pup "table td#cell$i text{}")
+	entry2=$(echo $html_page | pup "table td#cell$((i+6)) text{}")
+	column2+=( $entry1 )
+	column3+=( $entry2 )
+done
+IFS=$'\n'
+# column 1
+echo "${column2[*]}" | sort -nr | head -n1 # max
+echo "${column2[*]}" | sort | head -n1 # min
+s1=$(echo "${column2[*]}" | awk 'NF{sum+=$1} END {print sum}') # sum
+
+# column 2
+echo "${column3[*]}" | sort -nr | head -n1 # max
+echo "${column3[*]}" | sort | head -n1 # min
+s2=$(echo "${column3[*]}" | awk 'NF{sum+=$1} END {print sum}') #sum
+
+echo $(($s1 - $s2)) # difference
